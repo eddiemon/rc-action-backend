@@ -86,6 +86,4 @@ def favicon():
                                'static/favicon.ico', mimetype='image/vnd.microsoft.icon')
 if __name__ == '__main__':
     # Threaded option to enable multiple instances for multiple user access support
-    app.run(threaded=True, port=8000)
-    app.add_url_rule('/favicon.ico', redirect_to=url_for('static', filename='favicon.ico'))
-
+    app.run(threaded=True, port=5000)

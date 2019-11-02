@@ -1,14 +1,21 @@
 # app.py
 from flask import Flask, request, jsonify
 from src.services.FCMservice import FCMService
+import uuid
 
 app = Flask(__name__)
 
-
 @app.route('/api/reportIncident', methods=['POST'])
 def report_incident():
-    return request.json.get("hej")
+    event_id = generate_event_id()
+    push_event_notification(event_id)
+    return "", 200
 
+def generate_event_id():
+    return uuid.uuid4()
+
+def push_event_notification(event_id):
+    pass
 
 @app.route('/api/testNotifications')
 def test_push_notification():

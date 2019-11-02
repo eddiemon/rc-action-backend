@@ -26,8 +26,9 @@ class HardcodedDb:
 
         return self._user_data[user_id]["device_id"]
 
-    def get_user_ids_in_region(self, ):
-        pass
+    def get_user_ids_in_region(self, region_id):
+        return [x for x in self._user_data if self._user_data[x]["region"] == region_id]
 
     def get_region_from_point(self, lat, long):
-        return "Uppsala"
+        print(lat, long)
+        return "Uppsala"  # Do some magic to get region

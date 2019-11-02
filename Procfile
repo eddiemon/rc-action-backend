@@ -1,1 +1,1 @@
-web: FLASK_DEBUG=1 flask run -p $PORT
+web: FLASK_APP=app.py FLASK_ENVIRONMENT=production FLASK_DEBUG=0 flask run -p $PORT

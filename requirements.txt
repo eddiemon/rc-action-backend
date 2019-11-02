@@ -1,2 +1,6 @@
 flask
 pyfcm
+scrapy
+pymongo
+mysql-connector
+configparser

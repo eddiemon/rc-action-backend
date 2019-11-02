@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 
 @app.route('/api/reportIncident', methods=['POST'])
-def reportIncident():
+def report_incident():
     return request.json.get("hej")
 
 

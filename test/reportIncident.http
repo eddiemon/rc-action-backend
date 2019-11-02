@@ -5,6 +5,7 @@ Accept: application/json
 {
     "event": "fire",
     "coordinates": [
-        
+        40.741895,
+        -73.989308
     ]
 }

@@ -1,1 +1,1 @@
-web: flask run -p $PORT
+web: FLASK_DEBUG=1 flask run -p $PORT

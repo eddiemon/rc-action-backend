@@ -9,11 +9,21 @@ import subprocess
 
 app = Flask(__name__)
 
+unverified_events = []
+verified_events = []
+
+
+@app.route('/api/healthCheck', methods=['GET'])
+def health_check():
+    return "", 200
+
 
 @app.route('/api/reportIncident', methods=['POST'])
 def report_incident():
     event_id = generate_event_id()
-    push_event_notification(event_id)
+    event_type = request.json.get("type")
+    unverified_events.append(event_id)
+    push_event_notification(event_id, event_type)
     return "", 200
 
 
@@ -21,7 +31,14 @@ def generate_event_id():
     return uuid.uuid4()
 
 
-def push_event_notification(event_id):
+def push_event_notification(event_id, event_type):
+    print("pushing notifications of event type " + event_type)
+    pass
+
+
+@app.route("/api/verifyEvent")
+def verify_event():
+    event_id = request.json.get("eventId")
     pass
 
 

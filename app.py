@@ -1,6 +1,12 @@
 # app.py
 from flask import Flask, request, jsonify
+import json
+
 app = Flask(__name__)
+
+@app.route('/api/v1/testing')
+def testing():
+    return json.dumps({"hej": "san"})
 
 # A welcome message to test our server
 @app.route('/')

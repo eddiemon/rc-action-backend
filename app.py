@@ -4,6 +4,7 @@ from flask import Flask, request, jsonify, url_for, send_from_directory
 from src.services.FCMservice import FCMService
 import uuid
 import os
+import json
 from os import listdir
 import subprocess
 
@@ -72,13 +73,16 @@ def news():
     mypath = "./tweet_scraper/Data/tweet/"
     from os.path import isfile, join
     tweets = []
+    
     for file in os.listdir(mypath):
         filepath = os.path.join(mypath, file)
         f = open(filepath, 'r')
-        tweets.append(f.read())
+        tweets.append(json.loads(f.read()))
         f.close()
 
-    return jsonify(tweets)
+    news = { "news": tweets }
+
+    return jsonify(news)
 
 @app.route('/favicon.ico')
 def favicon():

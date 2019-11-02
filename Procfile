@@ -1,1 +1,1 @@
-web: gunicorn -w 4 -b 0.0.0.0:$PORT -k gevent app:app
+web: FLASK_APP=app.py FLASK_ENVIRONMENT=production FLASK_DEBUG=0 flask run -p $PORT

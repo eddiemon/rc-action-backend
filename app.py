@@ -1,6 +1,6 @@
 # app.py
 import flask
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, url_for, send_from_directory
 from src.services.FCMservice import FCMService
 import uuid
 import os
@@ -16,6 +16,7 @@ verified_events = []
 @app.route('/api/healthCheck', methods=['GET'])
 def health_check():
     return "", 200
+
 
 
 @app.route('/api/reportIncident', methods=['POST'])
@@ -79,6 +80,12 @@ def news():
 
     return jsonify(tweets)
 
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory(os.path.join(app.root_path, 'static'),
+                               'favicon.ico', mimetype='image/vnd.microsoft.icon')
 if __name__ == '__main__':
     # Threaded option to enable multiple instances for multiple user access support
-    app.run(threaded=True, port=8080)
+    app.run(threaded=True, port=8000)
+    app.add_url_rule('/favicon.ico', redirect_to=url_for('static', filename='favicon.ico'))
+

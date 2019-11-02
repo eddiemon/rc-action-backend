@@ -3,6 +3,9 @@ import flask
 from flask import Flask, request, jsonify
 from src.services.FCMservice import FCMService
 import uuid
+import os
+from os import listdir
+import subprocess
 
 app = Flask(__name__)
 
@@ -43,6 +46,21 @@ def notification_response_verification(response_type):
 def index():
     return "<h1>Welcome to our server !!</h1>"
 
+@app.route('/api/news')
+def news():
+    command = './run_script.sh'
+    process = subprocess.Popen(command, stdout=subprocess.PIPE, cwd="./tweet_scraper")
+    process.wait()
+    mypath = "./tweet_scraper/Data/tweet/"
+    from os.path import isfile, join
+    tweets = []
+    for file in os.listdir(mypath):
+        filepath = os.path.join(mypath, file)
+        f = open(filepath, 'r')
+        tweets.append(f.read())
+        f.close()
+
+    return jsonify(tweets)
 
 if __name__ == '__main__':
     # Threaded option to enable multiple instances for multiple user access support
